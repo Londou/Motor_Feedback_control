@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 
+
 uint8_t prompt[]="user@Nucleo-STM32G474RET6>>";
 uint8_t started[]=
 		"\r\n*-----------------------------*"
@@ -29,6 +30,7 @@ char* 		argv[MAX_ARGS];
 int		 	argc = 0;
 char*		token;
 int 		newCmdReady = 0;
+
 
 void Shell_Init(void){
 	memset(argv, NULL, MAX_ARGS*sizeof(char*));
@@ -76,11 +78,25 @@ void Shell_Loop(void){
 			int uartTxStringLength = snprintf((char *)uartTxBuffer, UART_TX_BUFFER_SIZE, "Print all available functions here\r\n");
 			HAL_UART_Transmit(&huart2, uartTxBuffer, uartTxStringLength, HAL_MAX_DELAY);
 		}
+		else if(strcmp(argv[0],"start")==0){
+			int uartTxStringLength = snprintf((char *)uartTxBuffer, UART_TX_BUFFER_SIZE, "POWER ON\r\n");
+			HAL_UART_Transmit(&huart2, uartTxBuffer, uartTxStringLength, HAL_MAX_DELAY);
+			set_PWM();
+				}
+		else if(strcmp(argv[0],"stop")==0){
+			int uartTxStringLength = snprintf((char *)uartTxBuffer, UART_TX_BUFFER_SIZE, "POWER OFF\r\n");
+			HAL_UART_Transmit(&huart2, uartTxBuffer, uartTxStringLength, HAL_MAX_DELAY);
+			deactivate_PWM();
+				}
 		else if(strcmp(argv[0],"speed")==0){
-			int value = atoi(argv[1]);
-			value++;
 
+		    set_motor_speed(atoi(argv[1]));
 		}
+
+		else if(strcmp(argv[0],"U_Imes")==0){
+		    mesure_Current_U();
+
+	    }
 		else{
 			HAL_UART_Transmit(&huart2, cmdNotFound, sizeof(cmdNotFound), HAL_MAX_DELAY);
 		}

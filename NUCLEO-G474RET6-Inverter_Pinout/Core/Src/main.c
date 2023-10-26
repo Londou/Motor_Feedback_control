@@ -112,13 +112,15 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-  HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
-  HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
-  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 717);
-  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 307);
+//  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
+//  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
+//  HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
+//  HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
+//  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 512);
+//  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 512);
 
+
+  Shell_Init();
   //HAL_GPIO_WritePin(EN_U_GPIO_Port, EN_U_Pin, SET);
   //HAL_GPIO_WritePin(EN_V_GPIO_Port, EN_V_Pin, SET);
 //  HAL_UART_Transmit(&huart2, HELLO, sizeof(HELLO), 100);
