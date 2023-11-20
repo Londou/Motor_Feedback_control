@@ -1,1 +1,3 @@
-../Core/Src/capteurs.c:22:7:mesure_Current_U	1
+../Core/Src/capteurs.c:25:7:mesure_Current_U	1
+../Core/Src/capteurs.c:49:6:HAL_ADC_ConvCpltCallback	3
+../Core/Src/capteurs.c:58:6:mesure_Speed	1

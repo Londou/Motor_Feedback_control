@@ -95,6 +95,10 @@ void Shell_Loop(void){
 
 		else if(strcmp(argv[0],"U_Imes")==0){
 		    mesure_Current_U();
+	    }
+
+		else if(strcmp(argv[0],"Measure_Speed")==0){
+		    mesure_Speed();
 
 	    }
 		else{

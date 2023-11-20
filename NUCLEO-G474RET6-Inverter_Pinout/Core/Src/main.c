@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "dma.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -105,12 +106,14 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_ADC2_Init();
   MX_ADC1_Init();
   MX_TIM1_Init();
   MX_TIM3_Init();
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 //  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
 //  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
@@ -216,7 +219,11 @@ void SystemClock_Config(void)
 //	    HAL_UART_Receive_IT(&huart2, (uint8_t*)&command[idx], 1);
 //	  }
 //}
-
+void HAL_ADC_ConvCpltcallback(ADC_HandleTypeDef* hadc)
+{
+	if(HAL_ADC_Stop_DMA(&hadc1) != HAL_OK)
+		Error_Handler();
+}
 /* USER CODE END 4 */
 
 /**

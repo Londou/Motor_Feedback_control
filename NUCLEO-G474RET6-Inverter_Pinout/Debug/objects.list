@@ -1,5 +1,7 @@
 "./Core/Src/adc.o"
 "./Core/Src/capteurs.o"
+"./Core/Src/dma.o"
+"./Core/Src/encoder.o"
 "./Core/Src/gpio.o"
 "./Core/Src/main.o"
 "./Core/Src/motor_speed.o"
