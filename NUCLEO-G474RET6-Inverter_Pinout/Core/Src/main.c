@@ -47,23 +47,6 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-//const char HELLO[]="MCC Controler\r\n";
-//char uartRxBuffer[1]; //: buffer de réception de donnée de l'uart
-//char command[32]; //: contenant la commande en cours
-//int idx=0; //messo da me
-//
-//int idxCmd; // : contenant l'index du prochain caractère à remplir
-//const uint8_t prompt[] = "\r\n>" ; //: contenant le prompt comme sur un shell linux
-//const uint8_t started[] = "Bienvenue au démarrage du microprocesseur\r\n"; //: contenant un message de bienvenue au démarrage du microprocesseur
-//const uint8_t newLine[] ="\r\n"; //: contenant la chaine de caractère pour faire un retour à la ligne
-//const uint8_t help[] = "COMMANDES DISPONIBLES:\r\n pinout\r\n start\r\n stop\r\n"; //: contenant le message d'aide, la liste des fonctions
-//const uint8_t pinout[] = "to do\r\n"; //: contenant la liste des pin utilisées
-//const uint8_t powerOn[] = "POWER ON\r\n"; //: contenant le message d'allumage du moteur
-//const uint8_t powerOff[]= "POWER OFF\r\n"; //: contenant le message d'extinction du moteur
-//const uint8_t cmdNotFound[]= "Command Not Found\r\n"; //: contenant le message du commande non reconnue
-//uint32_t uartRxReceived; //: flag de récéption d'un caractère sur la liaison uart
-//uint8_t uartTxBuffer[1]; //: buffer d'émission des données de l'uart
-
 
 /* USER CODE END PV */
 
@@ -115,30 +98,22 @@ int main(void)
   MX_USART3_UART_Init();
   MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
-//  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-//  HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-//  HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
-//  HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
-//  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 512);
-//  __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 512);
 
+  __enable_irq();
+  HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL); // Activation de l'encodeur
+  HAL_TIM_Base_Start_IT(&htim2);
 
   Shell_Init();
-  //HAL_GPIO_WritePin(EN_U_GPIO_Port, EN_U_Pin, SET);
-  //HAL_GPIO_WritePin(EN_V_GPIO_Port, EN_V_Pin, SET);
-//  HAL_UART_Transmit(&huart2, HELLO, sizeof(HELLO), 100);
-//  HAL_UART_Receive_IT(&huart2, uartRxBuffer, 1);
-  //HAL_UART_Transmit(&huart2, uartRxBuffer, 1, 100);
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+
 	  Shell_Loop();
-	//  HAL_UART_Transmit(&huart2, "Tick\r\n", 6, 100);
-//	  HAL_UART_Receive_IT(&huart2, (uint8_t*)&command[idx], 1); //messo da me
-//	  HAL_Delay(1000);
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -192,33 +167,7 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-//void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-//{
-//	HAL_UART_Transmit(&huart2, uartRxBuffer, 1, 100); // Echo
-//	HAL_UART_Receive_IT(&huart2, uartRxBuffer, 1); // Activate IT
-//	//command[idx]=uartRxBuffer[0];
-//	 if (command[idx] == '\r') { // Controllo carattere "ENTER"
-//	    command[idx] = '\0'; // Termina la stringa
-//	    idx = 0; // Resetta l'indice
-//	    // Esegue il comando
-//	    if (strcmp(command, "help") == 0) {
-//	      HAL_UART_Transmit(&huart2, (uint8_t*)"Elenco comandi disponibili: help, pinout, start, stop\r\n", strlen("Elenco comandi disponibili: help, pinout, start, stop\r\n"), HAL_MAX_DELAY);
-//	    } else if (strcmp(command, "pinout") == 0) {
-//	      HAL_UART_Transmit(&huart2, (uint8_t*)"Informazioni sul pinout: ... (inserire informazioni qui)\r\n", strlen("Informazioni sul pinout: ... (inserire informazioni qui)\r\n"), HAL_MAX_DELAY);
-//	    } else if (strcmp(command, "start") == 0) {
-//	      HAL_UART_Transmit(&huart2, (uint8_t*)"Power ON\r\n", strlen("Power ON\r\n"), HAL_MAX_DELAY);
-//	      // Esegui altre azioni per accendere l'età di potenza del motore
-//	    } else if (strcmp(command, "stop") == 0) {
-//	      HAL_UART_Transmit(&huart2, (uint8_t*)"Power OFF\r\n", strlen("Power OFF\r\n"), HAL_MAX_DELAY);
-//	      // Esegui altre azioni per spegnere l'età di potenza del motore
-//	    } else {
-//	      HAL_UART_Transmit(&huart2, (uint8_t*)"Comando non trovato\r\n", strlen("Comando non trovato\r\n"), HAL_MAX_DELAY);
-//	    }
-//	  } else {
-//	    idx++;
-//	    HAL_UART_Receive_IT(&huart2, (uint8_t*)&command[idx], 1);
-//	  }
-//}
+
 void HAL_ADC_ConvCpltcallback(ADC_HandleTypeDef* hadc)
 {
 	if(HAL_ADC_Stop_DMA(&hadc1) != HAL_OK)

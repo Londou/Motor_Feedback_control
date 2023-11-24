@@ -2,7 +2,7 @@
  * shell.c
  *
  *  Created on: Oct 1, 2023
- *      Author: nicolas
+ *      Author: Erika
  */
 #include "usart.h"
 #include "shell.h"
@@ -88,16 +88,16 @@ void Shell_Loop(void){
 			HAL_UART_Transmit(&huart2, uartTxBuffer, uartTxStringLength, HAL_MAX_DELAY);
 			deactivate_PWM();
 				}
-		else if(strcmp(argv[0],"speed")==0){
+		else if(strcmp(argv[0],"vitesse")==0){
 
 		    set_motor_speed(atoi(argv[1]));
 		}
 
-		else if(strcmp(argv[0],"U_Imes")==0){
+		else if(strcmp(argv[0],"Mesure_Courant")==0){
 		    mesure_Current_U();
 	    }
 
-		else if(strcmp(argv[0],"Measure_Speed")==0){
+		else if(strcmp(argv[0],"Mesure_Vitesse")==0){
 		    mesure_Speed();
 
 	    }
