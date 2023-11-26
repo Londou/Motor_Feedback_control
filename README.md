@@ -30,7 +30,7 @@ Cahier des charges
         Mesure_Vitesse : qui permet de mesurer la vitesse du moteur et l'aficher dans le shell,
         toute autre commande renverra un message dans la console "Command not found".
     Vider la chaine de caractère et mettez l'index pointant vers le prochain caractère à remplir à 0,
-    
+    Pilotage par liaison UART over USB,
     Génération des PWM,
     Mesure de courants (hall) dans les 3 phases + entrée,
     Mesure de tension dans les 3 phases + entrée,
@@ -47,9 +47,9 @@ Composants
     Hacheur 4 cadrants,
     Moteur à courant continue 48V-12.2A-3000tr/min,
     Commande de mise sous tension,
-    Pilotage par liaison UART over USB,
     Capteurs à effet hall,
     Encodeurs,
+    
 
     
 
